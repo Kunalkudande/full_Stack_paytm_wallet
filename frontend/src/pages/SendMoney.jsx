@@ -26,7 +26,7 @@ export function SendMoney({ toast }) {
 
   function transferMoney() {
     setIsLoading(true); // Set loading state to true
-    axios.post("http://localhost:3000/api/v1/account/transfer",
+    axios.post("https://paytm-wallet-backend1.vercel.app/api/v1/account/transfer",
         {
           toUser: `${id}`,
           amount: parseFloat(inputValue),
