@@ -12,7 +12,7 @@ export function Balance() {
     const token = localStorage.getItem("JWT-Token");
     try {
       const response = await axios.get(
-        "http://localhost:3000/api/v1/account/balance",
+        "https://paytm-wallet-backend1.vercel.app/api/v1/account/balance",
         {
           headers: {
             Authorization: "Bearer " + token,
