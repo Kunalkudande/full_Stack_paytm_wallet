@@ -10,7 +10,7 @@ export function Signup({ toast }) {
   const [lastName, setLastName] = useState("");
 
   function requestSignup() {
-    axios.post("http://localhost:3000/api/v1/user/signup", {
+    axios.post("https://paytm-wallet-backend1.vercel.app/api/v1/user/signup", {
         firstName,
         lastName,
         username,
