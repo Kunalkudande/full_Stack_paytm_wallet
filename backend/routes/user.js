@@ -4,7 +4,7 @@ const z = require("zod");
 const jwt = require("jsonwebtoken");
 const bcrypt = require("bcryptjs");
 
-const { User, Account } = require("../database/Schema");
+const { User, Account } = require("../database/schema");
 const { JWT_SECRET } = require("../config");
 
 const router = express.Router();
