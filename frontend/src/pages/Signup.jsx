@@ -11,12 +11,8 @@ export function Signup({ toast }) {
   const [alertMessage, setAlertMessage] = useState(null); // Alert message state
 
   function requestSignup() {
-<<<<<<< HEAD
     axios
       .post("https://paytm-wallet-backend1.vercel.app/api/v1/user/signup", {
-=======
-    axios.post("https://paytm-wallet-backend1.vercel.app/api/v1/user/signup", {
->>>>>>> 370e265a4f3c43f6358d4c006082c1eb67564cf6
         firstName,
         lastName,
         username,
