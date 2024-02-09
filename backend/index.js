@@ -8,7 +8,9 @@ const dbConnect = require('./database/dbconnect')
 dbConnect();
 
 const app = express();
-app.use(cors())
+app.use(cors({
+  origin: 'https://paytm-wallet-front.vercel.app'
+}));
 app.use(express.json())
 
 app.use('/api/v1',rootRouter);
