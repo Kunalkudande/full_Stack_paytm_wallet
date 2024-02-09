@@ -11,6 +11,7 @@ export function SendMoney({ toast }) {
   const name = searchParams.get("name");
   const [inputValue, setInputValue] = useState("");
   const [isLoading, setIsLoading] = useState(false); // Loading state
+  const [alertMessage, setAlertMessage] = useState(null);
 
   let dashboardRedirect;
 
@@ -26,7 +27,7 @@ export function SendMoney({ toast }) {
 
   function transferMoney() {
     setIsLoading(true); // Set loading state to true
-    axios.post("http://localhost:3000/api/v1/account/transfer",
+    axios.post("https://paytm-wallet-backend1.vercel.app/api/v1/account/transfer",
         {
           toUser: `${id}`,
           amount: parseFloat(inputValue),
@@ -38,7 +39,7 @@ export function SendMoney({ toast }) {
         }
       )
       .then(function (response) {
-        response.status === 200 && toast.success("Transaction Successful");
+        response.status === 200 && setAlertMessage("Transaction Successful");
         const userInfo = response.data.userInfo;
         dashboardRedirect = userInfo.name; // Assuming name is a property of userInfo
         setIsLoading(false); // Reset loading state
@@ -50,13 +51,13 @@ export function SendMoney({ toast }) {
       .catch(function (error) {
         setIsLoading(false); // Reset loading state
         error.response.status === 400
-          ? toast.error("Please fill the input field")
+          ? setAlertMessage("Please fill the input field")
           : error.response.status === 401
-          ? toast.error("Unauthorized request")
+          ? setAlertMessage("Unauthorized request")
           : error.response.status === 402
-          ? toast.error("Insufficient balance")
+          ? setAlertMessage("Insufficient balance")
           : error.response.status === 500
-          ? toast.error("Something went wrong")
+          ? setAlertMessage("Something went wrong")
           : null;
       });
   }
@@ -65,6 +66,12 @@ export function SendMoney({ toast }) {
     <>
       <div className="bg-gray-100 min-h-screen flex justify-center items-center">
         <div className="bg-white rounded-lg p-6 w-80">
+        {alertMessage && (
+          <div className="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative mb-4" role="alert">
+            <strong className="font-bold">Error!</strong>
+            <span className="block sm:inline"> {alertMessage}</span>
+          </div>
+        )}
           <Heading textValue="Send Money To" />
           <div className="flex items-center mb-4">
             <div className="bg-gray-300 rounded-full h-12 w-12 flex items-center justify-center mr-4">

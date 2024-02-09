@@ -8,9 +8,11 @@ export function Signup({ toast }) {
   const [password, setPassword] = useState("");
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
+  const [alertMessage, setAlertMessage] = useState(null); // Alert message state
 
   function requestSignup() {
-    axios.post("http://localhost:3000/api/v1/user/signup", {
+    axios
+      .post("https://paytm-wallet-backend1.vercel.app/api/v1/user/signup", {
         firstName,
         lastName,
         username,
@@ -18,7 +20,7 @@ export function Signup({ toast }) {
       })
       .then(function (response) {
         if (response.status === 200) {
-          toast.success("Signup Successfully");
+          setAlertMessage("Signup Successfully");
           navigate("/signin");
         }
       })
@@ -26,20 +28,19 @@ export function Signup({ toast }) {
         if (error.response) {
           switch (error.response.status) {
             case 400:
-              toast.error("Please fill all input fields correctly!");
-              console.log("give corrected input")
+              setAlertMessage("Please fill all input fields correctly!");
               break;
             case 409:
-              toast.error("Username already taken!");
+              setAlertMessage("Username already taken!");
               break;
             case 500:
-              toast.error("Something went wrong! Please try again.");
+              setAlertMessage("Something went wrong! Please try again.");
               break;
             default:
               break;
           }
         } else {
-          toast.error("An unexpected error occurred. Please try again later.");
+          setAlertMessage("An unexpected error occurred. Please try again later.");
         }
       });
   }
@@ -48,6 +49,12 @@ export function Signup({ toast }) {
     <div className="bg-gray-100 min-h-screen flex justify-center items-center">
       <div className="bg-white rounded-lg w-80 text-center p-6">
         <h1 className="text-2xl font-semibold mb-4">Sign Up</h1>
+        {alertMessage && (
+          <div className="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative mb-4" role="alert">
+            <strong className="font-bold">Error!</strong>
+            <span className="block sm:inline"> {alertMessage}</span>
+          </div>
+        )}
         <p className="text-gray-600 mb-4">
           Enter your information to create an account
         </p>
@@ -82,7 +89,7 @@ export function Signup({ toast }) {
           <input
             type="password"
             className="border border-gray-300 rounded-md w-full py-2 px-3 placeholder-gray-400 focus:outline-none focus:border-blue-500"
-            placeholder="Password"
+            placeholder="At least 8 characters"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
           />

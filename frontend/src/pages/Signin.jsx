@@ -6,16 +6,17 @@ export function Signin({ toast }) {
   const navigate = useNavigate();
   const [username, setUserName] = useState("");
   const [password, setPassword] = useState("");
+  const [alertMessage, setAlertMessage] = useState(null);
 
   function requestSignin() {
     axios
-      .post("http://localhost:3000/api/v1/user/signin", {
+      .post("https://paytm-wallet-backend1.vercel.app/api/v1/user/signin", {
         username,
         password,
       })
       .then(function (response) {
         if (response.status === 200) {
-          toast.success("Signed in Successfully");
+          setAlertMessage("Signed in Successfully");
           const authToken = response.data.token;
           localStorage.setItem("JWT-Token", authToken);
           navigate(`/dashboard?name=${response.data.firstName.split(" ")[0]}`);
@@ -25,16 +26,16 @@ export function Signin({ toast }) {
         if (error.response) {
           switch (error.response.status) {
             case 400:
-              toast.error("Please fill the input fields correctly!");
+              setAlertMessage("Please fill the input fields correctly!");
               break;
             case 404:
-              toast.error("Username does not exist!");
+              setAlertMessage("Username does not exist!");
               break;
             case 401:
-              toast.error("Incorrect password!");
+              setAlertMessage("Incorrect password!");
               break;
             case 500:
-              toast.error("Something went wrong!");
+              setAlertMessage("Something went wrong!");
               break;
             default:
               break;
@@ -47,6 +48,12 @@ export function Signin({ toast }) {
     <div className="bg-gray-100 min-h-screen flex justify-center items-center">
       <div className="bg-white rounded-lg w-80 text-center p-6">
         <h1 className="text-2xl font-semibold mb-4">Sign in</h1>
+        {alertMessage && (
+          <div className="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative mb-4" role="alert">
+            <strong className="font-bold">Error!</strong>
+            <span className="block sm:inline"> {alertMessage}</span>
+          </div>
+        )}
         <p className="text-gray-600 mb-4">
           Enter your credentials to access your account
         </p>

@@ -12,7 +12,7 @@ export function Users() {
     // getting the token from local storage;
     const token = localStorage.getItem("JWT-Token");
     axios
-      .get(`http://localhost:3000/api/v1/user/bulk?filter=${inputValue}`, {
+      .get(`https://paytm-wallet-backend1.vercel.app/api/v1/user/bulk?filter=${inputValue}`, {
         headers: {
           Authorization: "Bearer " + token,
         },
