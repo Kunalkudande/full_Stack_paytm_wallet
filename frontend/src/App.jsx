@@ -18,7 +18,7 @@ function App() {
           <Route path="/dashboard" element={<Dashboard/>}></Route> */
           <Route path="/send" element={<SendMoney toast={toast}/>}></Route>
         </Routes>
-      
+        <Toaster/>
       </BrowserRouter>
 
     </div>

@@ -6,7 +6,6 @@ export function Signin({ toast }) {
   const navigate = useNavigate();
   const [username, setUserName] = useState("");
   const [password, setPassword] = useState("");
-  const [alertMessage, setAlertMessage] = useState(null);
 
   function requestSignin() {
     axios
@@ -16,7 +15,7 @@ export function Signin({ toast }) {
       })
       .then(function (response) {
         if (response.status === 200) {
-          setAlertMessage("Signed in Successfully");
+          toast.success("Signed in Successfully");
           const authToken = response.data.token;
           localStorage.setItem("JWT-Token", authToken);
           navigate(`/dashboard?name=${response.data.firstName.split(" ")[0]}`);
@@ -26,16 +25,16 @@ export function Signin({ toast }) {
         if (error.response) {
           switch (error.response.status) {
             case 400:
-              setAlertMessage("Please fill the input fields correctly!");
+              toast.error("Please fill the input fields correctly!");
               break;
             case 404:
-              setAlertMessage("Username does not exist!");
+              toast.error("Username does not exist!");
               break;
             case 401:
-              setAlertMessage("Incorrect password!");
+              toast.error("Incorrect password!");
               break;
             case 500:
-              setAlertMessage("Something went wrong!");
+              toast.error("Something went wrong!");
               break;
             default:
               break;

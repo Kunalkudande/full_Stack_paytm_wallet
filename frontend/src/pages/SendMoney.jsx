@@ -39,7 +39,7 @@ export function SendMoney({ toast }) {
         }
       )
       .then(function (response) {
-        response.status === 200 && setAlertMessage("Transaction Successful");
+        response.status === 200 && toast.success("Transaction Successful");
         const userInfo = response.data.userInfo;
         dashboardRedirect = userInfo.name; // Assuming name is a property of userInfo
         setIsLoading(false); // Reset loading state
@@ -49,15 +49,15 @@ export function SendMoney({ toast }) {
         }, 5000); // Delay navigation for 2 seconds
       })
       .catch(function (error) {
-        setIsLoading(false); // Reset loading state
+        // setIsLoading(false); // Reset loading state
         error.response.status === 400
-          ? setAlertMessage("Please fill the input field")
+          ? toast.error("Please fill the input field")
           : error.response.status === 401
-          ? setAlertMessage("Unauthorized request")
+          ? toast.error("Unauthorized request")
           : error.response.status === 402
-          ? setAlertMessage("Insufficient balance")
+          ? toast.error("Insufficient balance")
           : error.response.status === 500
-          ? setAlertMessage("Something went wrong")
+          ? toast.error("Something went wrong")
           : null;
       });
   }

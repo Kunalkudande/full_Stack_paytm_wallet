@@ -11,8 +11,7 @@ export function Signup({ toast }) {
   const [alertMessage, setAlertMessage] = useState(null); // Alert message state
 
   function requestSignup() {
-    axios
-      .post("https://paytm-wallet-backend1.vercel.app/api/v1/user/signup", {
+    axios.post("https://paytm-wallet-backend1.vercel.app/api/v1/user/signup", {
         firstName,
         lastName,
         username,
@@ -20,7 +19,7 @@ export function Signup({ toast }) {
       })
       .then(function (response) {
         if (response.status === 200) {
-          setAlertMessage("Signup Successfully");
+          toast.success("Signup Successfully");
           navigate("/signin");
         }
       })
@@ -28,19 +27,19 @@ export function Signup({ toast }) {
         if (error.response) {
           switch (error.response.status) {
             case 400:
-              setAlertMessage("Please fill all input fields correctly!");
+              toast.error("Please fill all input fields correctly!");
               break;
             case 409:
-              setAlertMessage("Username already taken!");
+              toast.error("Username already taken!");
               break;
             case 500:
-              setAlertMessage("Something went wrong! Please try again.");
+              toast.error("Something went wrong! Please try again.");
               break;
             default:
               break;
           }
         } else {
-          setAlertMessage("An unexpected error occurred. Please try again later.");
+          toast.error("An unexpected error occurred. Please try again later.");
         }
       });
   }
