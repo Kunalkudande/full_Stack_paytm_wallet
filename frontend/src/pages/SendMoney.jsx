@@ -11,8 +11,7 @@ export function SendMoney({ toast }) {
   const name = searchParams.get("name");
   const [inputValue, setInputValue] = useState("");
   const [isLoading, setIsLoading] = useState(false); // Loading state
-
-  let dashboardRedirect;
+  const [dashboardRedirect, setDashboardRedirect] = useState(""); // State for dashboard redirection
 
   useEffect(() => {
     if (isLoading) {
@@ -40,7 +39,7 @@ export function SendMoney({ toast }) {
       .then(function (response) {
         response.status === 200 && toast.success("Transaction Successful");
         const userInfo = response.data.userInfo;
-        dashboardRedirect = userInfo.name; // Assuming name is a property of userInfo
+        setDashboardRedirect = userInfo.name; // Assuming name is a property of userInfo
         setIsLoading(false); // Reset loading state
         setTimeout(() => {
           navigate(`/dashboard?name=${userInfo.name}`);
