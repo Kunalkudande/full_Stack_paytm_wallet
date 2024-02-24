@@ -47,12 +47,6 @@ export function Signin({ toast }) {
     <div className="bg-gray-100 min-h-screen flex justify-center items-center">
       <div className="bg-white rounded-lg w-80 text-center p-6">
         <h1 className="text-2xl font-semibold mb-4">Sign in</h1>
-        {alertMessage && (
-          <div className="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative mb-4" role="alert">
-            <strong className="font-bold">Error!</strong>
-            <span className="block sm:inline"> {alertMessage}</span>
-          </div>
-        )}
         <p className="text-gray-600 mb-4">
           Enter your credentials to access your account
         </p>

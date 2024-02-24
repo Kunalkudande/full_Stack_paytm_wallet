@@ -49,7 +49,7 @@ export function SendMoney({ toast }) {
         }, 5000); // Delay navigation for 2 seconds
       })
       .catch(function (error) {
-        // setIsLoading(false); // Reset loading state
+        setIsLoading(false); // Reset loading state
         error.response.status === 400
           ? toast.error("Please fill the input field")
           : error.response.status === 401
@@ -66,12 +66,7 @@ export function SendMoney({ toast }) {
     <>
       <div className="bg-gray-100 min-h-screen flex justify-center items-center">
         <div className="bg-white rounded-lg p-6 w-80">
-        {alertMessage && (
-          <div className="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative mb-4" role="alert">
-            <strong className="font-bold">Error!</strong>
-            <span className="block sm:inline"> {alertMessage}</span>
-          </div>
-        )}
+        
           <Heading textValue="Send Money To" />
           <div className="flex items-center mb-4">
             <div className="bg-gray-300 rounded-full h-12 w-12 flex items-center justify-center mr-4">
