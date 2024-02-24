@@ -8,7 +8,6 @@ export function Signup({ toast }) {
   const [password, setPassword] = useState("");
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
-  const [alertMessage, setAlertMessage] = useState(null); // Alert message state
 
   function requestSignup() {
     axios.post("https://paytm-wallet-backend1.vercel.app/api/v1/user/signup", {
