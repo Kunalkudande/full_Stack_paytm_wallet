@@ -12,17 +12,17 @@ export function SendMoney({ toast }) {
   const [inputValue, setInputValue] = useState("");
   const [isLoading, setIsLoading] = useState(false); // Loading state
 
-  let dashboardRedirect;
+  let userInfo;
 
   useEffect(() => {
     if (isLoading) {
       setTimeout(() => {
         setIsLoading(false);
-        navigate(`/dashboard?name=${dashboardRedirect}`);
+        navigate(`/dashboard?name=${userInfo.name}`);
         setInputValue("");
       }, 2000); // Delay navigation for 2 seconds
     }
-  }, [isLoading, navigate, dashboardRedirect]);
+  }, [isLoading, navigate, userInfo.name]);
 
   function transferMoney() {
     setIsLoading(true); // Set loading state to true
@@ -39,8 +39,8 @@ export function SendMoney({ toast }) {
       )
       .then(function (response) {
         response.status === 200 && toast.success("Transaction Successful");
-        const userInfo = response.data.userInfo;
-        dashboardRedirect = userInfo.name; // Assuming name is a property of userInfo
+        userInfo = response.data.userInfo;
+        //dashboardRedirect = userInfo.name; // Assuming name is a property of userInfo
         setIsLoading(false); // Reset loading state
         setTimeout(() => {
           navigate(`/dashboard?name=${userInfo.name}`);
