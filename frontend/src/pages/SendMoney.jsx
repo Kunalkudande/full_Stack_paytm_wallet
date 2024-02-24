@@ -12,17 +12,8 @@ export function SendMoney({ toast }) {
   const [inputValue, setInputValue] = useState("");
   const [isLoading, setIsLoading] = useState(false); // Loading state
 
+  
   let userInfo;
-
-  useEffect(() => {
-    if (isLoading) {
-      setTimeout(() => {
-        setIsLoading(false);
-        navigate(`/dashboard?name=${userInfo.name}`);
-        setInputValue("");
-      }, 2000); // Delay navigation for 2 seconds
-    }
-  }, [isLoading, navigate, userInfo.name]);
 
   function transferMoney() {
     setIsLoading(true); // Set loading state to true
@@ -59,6 +50,17 @@ export function SendMoney({ toast }) {
           ? toast.error("Something went wrong")
           : null;
       });
+
+
+  useEffect(() => {
+    if (isLoading) {
+      setTimeout(() => {
+        setIsLoading(false);
+        navigate(`/dashboard?name=${userInfo.name}`);
+        setInputValue("");
+      }, 2000); // Delay navigation for 2 seconds
+    }
+  }, [isLoading, navigate, userInfo.name]);
   }
 
   return (
