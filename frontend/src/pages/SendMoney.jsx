@@ -39,7 +39,7 @@ export function SendMoney({ toast }) {
       .then(function (response) {
         response.status === 200 && toast.success("Transaction Successful");
         const userInfo = response.data.userInfo;
-        setDashboardRedirect = userInfo.name; // Assuming name is a property of userInfo
+        setDashboardRedirect(userInfo.name); // Assuming name is a property of userInfo
         setIsLoading(false); // Reset loading state
         setTimeout(() => {
           navigate(`/dashboard?name=${userInfo.name}`);
