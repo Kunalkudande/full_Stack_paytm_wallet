@@ -11,7 +11,6 @@ export function SendMoney({ toast }) {
   const name = searchParams.get("name");
   const [inputValue, setInputValue] = useState("");
   const [isLoading, setIsLoading] = useState(false); // Loading state
-  const [alertMessage, setAlertMessage] = useState(null);
 
   let dashboardRedirect;
 
@@ -44,7 +43,7 @@ export function SendMoney({ toast }) {
         dashboardRedirect = userInfo.name; // Assuming name is a property of userInfo
         setIsLoading(false); // Reset loading state
         setTimeout(() => {
-          navigate(`/dashboard?name=${dashboardRedirect}`);
+          navigate(`/dashboard?name=${userInfo.name}`);
           setInputValue("");
         }, 5000); // Delay navigation for 2 seconds
       })
