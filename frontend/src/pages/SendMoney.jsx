@@ -18,6 +18,7 @@ export function SendMoney({ toast }) {
       setTimeout(() => {
         setIsLoading(false);
         navigate(`/dashboard?name=${dashboardRedirect}`);
+        console.log(dashboardRedirect, "name");
         setInputValue("");
       }, 2000); // Delay navigation for 2 seconds
     }
@@ -43,6 +44,7 @@ export function SendMoney({ toast }) {
         setIsLoading(false); // Reset loading state
         setTimeout(() => {
           navigate(`/dashboard?name=${userInfo.name}`);
+          console.log("name");
           setInputValue("");
         }, 5000); // Delay navigation for 2 seconds
       })
